@@ -3,6 +3,7 @@
  * This file is subject to the license terms contained
  * in the license file that is distributed with this file.
  */
+
 'use strict';
 
 const uldp = require('./uldp');
@@ -32,15 +33,12 @@ module.exports = async function (context, eventHubMessages) {
     eventHubMessages.forEach((message, index) => {
         message.records.forEach((record, idx) => {
             let msg = JSON.stringify(record);
-            if (debug) {
-                context.log(`Processed message ${msg}`);
-            }
             let eventDate = new Date(record.time);
-            if (flatten) {
+            if ( flatten ) {
                 msg = util.toFlatText(msg);
             }
             resultCount++;
-            uldpSender.sendMessage(uldp.createSyslogMessage(eventDate, srcIP, "MSAzureAD " + msg));
+            uldpSender.sendMessage(uldp.createSyslogMessage(eventDate, srcIP, "AKSmonitor " + msg));
         })
     });
 
