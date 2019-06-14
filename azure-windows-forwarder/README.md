@@ -1,11 +1,12 @@
 # Azure function for collecting Windows VM events
 
-This Azure function can be used to collect Windows Events from Windows VMs running on Azure, and send the to an LMI appliance, usually in the cloud.
-This uses Azure agent for log collection on the Vms, Azure storage for storing those logs, and Azure function to periodically poll and forward those logs to an LMI using the ULDP protocol.
+This Azure function can be used to collect Windows Events from Windows VMs running on Azure, and send them to an LMI appliance, usually in the cloud.
+
+It uses Azure Agent for event collection on the VMs, Azure Storage for storing those events, and Azure Functions to periodically poll and forward those events to an LMI using the ULDP protocol.
 
 ## Step 1: Configure Azure Agent on the Windows VM
 
-In the Azure portsl, select the Windows VM.
+In the Azure portal, select the Windows VM.
 
 Go to Monitoring/Diagnostics Settings
 
