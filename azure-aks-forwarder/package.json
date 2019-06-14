@@ -1,0 +1,18 @@
+{
+  "name": "azure-aks-forwarder",
+  "version": "1.0.0",
+  "description": "LogLogic Azure AKS events to ULDP function",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Laurent Pautet",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "dependencies": {
+    "ip": "^1.1.5"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "ULDP",
+    "loglogic"
+  ]
+}

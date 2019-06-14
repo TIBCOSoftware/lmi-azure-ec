@@ -1,0 +1,13 @@
+{
+  "disabled": false,
+  "bindings": [
+    {
+      "type": "eventHubTrigger",
+      "name": "eventHubMessages",
+      "direction": "in",
+      "eventHubName": "insights-logs-kube-apiserver",
+      "cardinality": "many",
+      "connection": "EVENT_HUB_CONNECTION_STRING"
+    }
+  ]
+}
