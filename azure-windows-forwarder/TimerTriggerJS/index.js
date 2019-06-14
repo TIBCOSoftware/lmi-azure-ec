@@ -147,11 +147,13 @@ module.exports = async function (context, myTimer) {
 
             for (let row of result.entries) {
                 resultCount++;
-                if (checkpoint._ > row.EventTickCount._) {
-                    context.log('Unexpected event time SMALLER than checkpoint ! ' + checkpoint._ + '>' + row.EventTickCount._);
+                if (oldCheckpoint._ > row.EventTickCount._) {
+                    context.log('Unexpected event time SMALLER than previous checkpoint ! ' + checkpoint._ + '>' + row.EventTickCount._);
                     continue;
                 }
-                checkpoint = row.EventTickCount;
+                if (checkpoint._ < row.EventTickCount._) {
+                    checkpoint = row.EventTickCount;
+                }
 
                 const prom = processRow(row);
                 promises.push(prom);
