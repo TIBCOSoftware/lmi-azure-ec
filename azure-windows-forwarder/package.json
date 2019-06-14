@@ -1,0 +1,23 @@
+{
+  "name": "azure-windows-forwarder",
+  "version": "1.0.0",
+  "description": "Azure function forwarding Windows logs from Azure storage",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "TIBCO LogLogic",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "dependencies": {
+    "ip": "^1.1.5",
+    "xml2js": "",
+    "azure-storage": "",
+    "moment": ""
+  },
+  "devDependencies": {},
+  "keywords": [
+    "ULDP",
+    "loglogic",
+    "Azure",
+    "Windows"
+  ]
+}
