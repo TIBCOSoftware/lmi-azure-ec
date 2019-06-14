@@ -25,37 +25,52 @@ In the list of available logs, select the logs you wish to enable. By default, t
 When ready, select Save to enable collection of the selected logs.
 
 
-#Step 2: Collecting AKS monitor logs using an Azure function
+# Step 2: Collecting AKS monitor logs using an Azure function
 
 
 Create the function app
 
+Many other forms of deployment are possible based on the same package, to directly deploy the ZIP file, please read:
+
+https://docs.microsoft.com/en-us/azure/azure-functions/deployment-zip-push
+
+You need to create the Azure Function app in the portal or using the CLI as described below and create the application settings, as well.
+
 ```
-export APP_NAME=xxx
-az functionapp create -g ${GROUP_NAME} --consumption-plan-location ${GROUP_LOCATION} -n ${APP_NAME} --storage-account ${SA_NAME} --runtime node
+export GROUP_LOCATION=westus2
+export GROUP_NAME="<name of the resource group to use>"
+export APP_NAME="<name of the function app to create>"
+export APP_STORAGE_ACCOUNT="<storage account for the function app logs>"
 
+az functionapp create -g ${GROUP_NAME} --consumption-plan-location ${GROUP_LOCATION} -n ${APP_NAME} -s ${APP_STORAGE_ACCOUNT} --runtime node
+```
 
-Then set the required app settings
+You also need to set the applicaiton settings, and set WEBSITE_NODE_DEFAULT_VERSION to 8.11.1
+```
+export EVENT_HUB_CONNECTION_STRING="<event hub connection string from step 2>"
+export ULDP_HOST="<host or ip of LMI instance>"
+export ULDP_COLLECTOR_DOMAIN="<collector domain name>"
+export ZIP_PACKAGE_PATH="<zip package path>"
 
 az functionapp config appsettings set --name ${APP_NAME} -g ${GROUP_NAME} --settings WEBSITE_NODE_DEFAULT_VERSION=8.11.1
-export EH_CNX_STRING=<the event hub connection string>
-az functionapp config appsettings set --name ${APP_NAME} -g ${GROUP_NAME} --settings EVENT_HUB_CONNECTION_STRING=${EH_CNX_STRING}
-export ULDP_HOST=<the uldp host name or IP address>
-az functionapp config appsettings set --name ${APP_NAME} -g ${GROUP_NAME} --settings ULDP_HOST=${ULDP_HOST}
-export ULDP_COLLECTOR_DOMAIN=<the ULDP collector domain>
-az functionapp config appsettings set --name ${APP_NAME} -g ${GROUP_NAME} --settings ULDP_COLLECTOR_DOMAIN=${ULDP_COLLECTOR_DOMAIN}
-az functionapp config appsettings set --name ${APP_NAME} -g ${GROUP_NAME} --settings FLATTEN=true
+
+az functionapp config appsettings set --name ${APP_NAME} -g ${GROUP_NAME} --settings "EVENT_HUB_CONNECTION_STRING=${EVENT_HUB_CONNECTION_STRING}"
+
+az functionapp config appsettings set --name ${APP_NAME} -g ${GROUP_NAME} --settings "ULDP_HOST=${ULDP_HOST}"
+
+az functionapp config appsettings set --name ${APP_NAME} -g ${GROUP_NAME} --settings "ULDP_COLLECTOR_DOMAIN=${ULDP_COLLECTOR_DOMAIN}"
 ```
 
-Now the last command is to actually deploy the sources and configuration zip for the newly created function app:
+Now the last command to actualy deploy the package in the newly created function app:
 
 ```
-export APP_ZIP_PATH=xxxx
-az functionapp deployment source config-zip -g ${GROUP_NAME} -n ${APP_NAME} --src ${APP_ZIP_PATH}
+az functionapp deployment source config-zip -g ${GROUP_NAME} -n ${APP_NAME} --src ${ZIP_PACKAGE_PATH}
 ```
 
-#Development,
-You need to run in top directory (this is done for you if you run the maven build):
+
+# Developement
+
+You need to run those commands first (this is done for you if you run the maven build):
 
 ```
 npm install
@@ -66,3 +81,5 @@ func extensions install
 First is to install the Node.JS dependencies, the second is to install the Azure Functions dependencies. (cf. https://docs.microsoft.com/en-us/azure/azure-functions/functions-triggers-bindings#local-development-azure-functions-core-tools)
 
 to get the func tool, look at: https://code.visualstudio.com/tutorials/functions-extension/getting-started
+
+
