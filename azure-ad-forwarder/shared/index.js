@@ -27,9 +27,11 @@ module.exports = async function (context, eventHubMessages) {
     eventHubMessages.forEach((message, index) => {
         message.records.forEach((record, idx) => {
             let msg = JSON.stringify(record);
-            context.log(`Processed message ${msg}`);
+            if (debug) {
+                context.log(`Processed message ${msg}`);
+            }
             let eventDate = new Date(record.time);
-            if ( flatten ) {
+            if (flatten) {
                 msg = util.toFlatText(msg);
             }
             resultCount++;
