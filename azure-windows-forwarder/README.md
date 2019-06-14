@@ -85,34 +85,39 @@ The first step creates the function app in a resource group.
 
 ```
 export GROUP_LOCATION=westus2
-export GROUP_NAME=xxxx
-export APP_NAME=xxxx
-export STORAGE_ACCOUNT=xxxx
+export GROUP_NAME="<name of the resource group to use>"
+export APP_NAME="<name of the function app to create>"
+export APP_STORAGE_ACCOUNT="<storage account for the function app logs>"
 
-az functionapp create -g ${GROUP_NAME} --consumption-plan-location ${GROUP_LOCATION} -n ${APP_NAME} -s ${STORAGE_ACCOUNT} --runtime node
+az functionapp create -g ${GROUP_NAME} --consumption-plan-location ${GROUP_LOCATION} -n ${APP_NAME} -s ${APP_STORAGE_ACCOUNT} --runtime node
 ```
 
 You also need to set the applicaiton settings, and set WEBSITE_NODE_DEFAULT_VERSION to 8.11.1
 ```
+export STORAGE_CONNECTION_STRING=<storage connection string from step 2>
+export ULDP_HOST=<host or ip of LMI instance>
+export ULDP_CONNECTION_STRING=<collector domain name>
+export ZIP_PACKAGE_PATH=<zip package path>
+
 az functionapp config appsettings set --name ${APP_NAME} -g ${GROUP_NAME} --settings WEBSITE_NODE_DEFAULT_VERSION=8.11.1
 
-az functionapp config appsettings set --name ${APP_NAME} -g ${GROUP_NAME} --settings "STORAGE_CONNECTION_STRING=<storage connection string>"
+az functionapp config appsettings set --name ${APP_NAME} -g ${GROUP_NAME} --settings "STORAGE_CONNECTION_STRING=${STORAGE_CONNECTION_STRING}"
 
-az functionapp config appsettings set --name ${APP_NAME} -g ${GROUP_NAME} --settings ULDP_HOST=<host or ip>
+az functionapp config appsettings set --name ${APP_NAME} -g ${GROUP_NAME} --settings "ULDP_HOST=${ULDP_HOST}"
 
-az functionapp config appsettings set --name ${APP_NAME} -g ${GROUP_NAME} --settings ULDP_COLLECTOR_DOMAIN=<collector domain>
+az functionapp config appsettings set --name ${APP_NAME} -g ${GROUP_NAME} --settings "ULDP_COLLECTOR_DOMAIN=${ULDP_CONNECTION_STRING}"
 ```
 
 Now the last command to actualy deploy the package in the newly created function app:
 
 ```
-az functionapp deployment source config-zip -g ${GROUP_NAME} -n ${APP_NAME} --src <zip package path>
+az functionapp deployment source config-zip -g ${GROUP_NAME} -n ${APP_NAME} --src ${ZIP_PACKAGE_PATH}
 ```
 
 
 # Developement
 
-You need to run in top directory (this is done for you if you run the maven build):
+You need to run thoe commands first (this is done for you if you run the maven build):
 
 ```
 npm install
