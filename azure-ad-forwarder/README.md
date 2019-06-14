@@ -118,7 +118,7 @@ You also need to set the applicaiton settings, and set WEBSITE_NODE_DEFAULT_VERS
 ```
 export EVENT_HUB_CONNECTION_STRING="<event hub connection string from step 2>"
 export ULDP_HOST="<host or ip of LMI instance>"
-export ULDP_CONNECTION_STRING="<collector domain name>"
+export ULDP_COLLECTOR_DOMAIN="<collector domain name>"
 export ZIP_PACKAGE_PATH="<zip package path>"
 
 az functionapp config appsettings set --name ${APP_NAME} -g ${GROUP_NAME} --settings WEBSITE_NODE_DEFAULT_VERSION=8.11.1
@@ -127,7 +127,7 @@ az functionapp config appsettings set --name ${APP_NAME} -g ${GROUP_NAME} --sett
 
 az functionapp config appsettings set --name ${APP_NAME} -g ${GROUP_NAME} --settings "ULDP_HOST=${ULDP_HOST}"
 
-az functionapp config appsettings set --name ${APP_NAME} -g ${GROUP_NAME} --settings "ULDP_COLLECTOR_DOMAIN=${ULDP_CONNECTION_STRING}"
+az functionapp config appsettings set --name ${APP_NAME} -g ${GROUP_NAME} --settings "ULDP_COLLECTOR_DOMAIN=${ULDP_COLLECTOR_DOMAIN}"
 ```
 
 Now the last command to actualy deploy the package in the newly created function app:
