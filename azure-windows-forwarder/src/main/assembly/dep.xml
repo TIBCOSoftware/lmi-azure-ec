@@ -15,22 +15,9 @@
                 <include>host.json</include>
                 <include>package.json</include>
                 <include>extensions.csproj</include>
-            </includes>
-        </fileSet>
-        <fileSet>
-            <directory>${project.basedir}</directory>
-            <outputDirectory>/</outputDirectory>
-            <includes>
-                <include>TimerTriggerJS/</include>
                 <include>bin/</include>
                 <include>obj/</include>
-            </includes>
-        </fileSet>
-        <fileSet>
-            <directory>${project.basedir}</directory>
-            <outputDirectory>/TimerTriggerJS/</outputDirectory>
-            <includes>
-                <include>package.json/</include>
+                <include>TimerTriggerJS/</include>
             </includes>
         </fileSet>
     </fileSets>
