@@ -46,18 +46,31 @@ STORAGE_CONNECTION_STRING : this should contain the connection strings for the s
 
 ULDP_HOST : the host/IP address of the LMI instance
 ULDP_COLLECTOR_DOMAIN : the collector domain to use (this is usefull to identify your log source, as the source IP address of the Windows host will not be available)
+
 Then save,
+
 Now you need to create the Function content, this will be triggered by a timer.
+
 Click on the plus sign next to the Functions label.
+
 Choose TimerTrigger, then enter the name of the new function.
+
 Then select that function and click on "View Files" at the right of the edit buffer.
+
 Click the upload button, then navigate to the place where you unziped the package, and select all the file within the TimerTriggerJS directory.
+
 The files should appear, check their content.
+
 Then click on Console at the bottom of the edit buffer
+
 at them prompt, type: npm install
+
 That will download and install the dependencies of the function
+
 The function is now ready and will be running every minute.
+
 The Schedule can be adjusted in the Integrate panel. The schedule string conforms to the Unix CRON format.
+
 You can use the Monitor panel to check the outcome of each function execution, and while clicking on one entry, you get the logs for that run.
 
 ### Deploy using Azure CLI
