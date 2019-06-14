@@ -94,10 +94,10 @@ az functionapp create -g ${GROUP_NAME} --consumption-plan-location ${GROUP_LOCAT
 
 You also need to set the applicaiton settings, and set WEBSITE_NODE_DEFAULT_VERSION to 8.11.1
 ```
-export STORAGE_CONNECTION_STRING=<storage connection string from step 2>
-export ULDP_HOST=<host or ip of LMI instance>
-export ULDP_CONNECTION_STRING=<collector domain name>
-export ZIP_PACKAGE_PATH=<zip package path>
+export STORAGE_CONNECTION_STRING="<storage connection string from step 2>"
+export ULDP_HOST="<host or ip of LMI instance>"
+export ULDP_CONNECTION_STRING="<collector domain name>"
+export ZIP_PACKAGE_PATH="<zip package path>"
 
 az functionapp config appsettings set --name ${APP_NAME} -g ${GROUP_NAME} --settings WEBSITE_NODE_DEFAULT_VERSION=8.11.1
 
@@ -117,7 +117,7 @@ az functionapp deployment source config-zip -g ${GROUP_NAME} -n ${APP_NAME} --sr
 
 # Developement
 
-You need to run thoe commands first (this is done for you if you run the maven build):
+You need to run those commands first (this is done for you if you run the maven build):
 
 ```
 npm install
