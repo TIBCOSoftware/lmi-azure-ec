@@ -61,24 +61,41 @@ EVENT_HUB_CONNECTION_STRING : this should contain the connection strings for the
 ULDP_HOST : the host/IP address of the LMI instance
 
 ULDP_COLLECTOR_DOMAIN : the collector domain to use (this is usefull to identify your log source, as the source IP address of the Windows host will not be available)
+
 Then save,
+
 Now you need to create the Function content, this will be triggered by the event Hub (for the Azure AD signin)
+
 Click on the plus sign next to the Functions label.
+
 Choose "in portal", then "continue"
+
 Choose "more templates", then click on "finish and view templates"
+
 Type "event" in the search bar, then locate and select "Azure Event Hub Trigger", click on install the extension (this takes a few minutes as a background process).
+
 Then enter the name of the new function, select EVENT_HUB_CONNECTION_STRING as the Event Hub Connection, Event Hub Name should be insights-logs-signinlogs
+
 Then click on the 'create' button
 
 Then select that function and click on "View Files" at the right of the edit buffer.
+
 Click the upload button, then navigate to the place where you unziped the package, and select all the file within the SigninLogsTrigger directory (except function.json).
+
 The files should appear after some time, you may need to reload the page, check their content.
+
 Then click on Console at the bottom of the edit buffer
-at them prompt, type: npm install
+
+at the prompt, type: npm install
+
 That will download and install the dependencies of the function
+
 The function is now ready and will be listening for new event in the event hub.
+
 You can use the Monitor panel to check the outcome of each function execution, and while clicking on one entry, you get the logs for that run.
+
 If you also want to track audit logs, you need to follow that same procedure, and put an event hub name of insights-logs-auditlogs, and the files should be coming from the AuditLogsTrigger directory
+
 If you also want to track activity logs, you need to follow that same procedure, and put an event hub name of insights-operational-logs, and the files should be coming from the ActivityLogsTrigger directory
 
 ## create the function using Azure CLI
