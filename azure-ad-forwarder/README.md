@@ -133,7 +133,7 @@ az functionapp config appsettings set --name ${APP_NAME} -g ${GROUP_NAME} --sett
 Now the last command to actualy deploy the package in the newly created function app:
 
 ```
-az functionapp deployment source config-zip -g ${GROUP_NAME} -n ${APP_NAME} --src <zip package path>
+az functionapp deployment source config-zip -g ${GROUP_NAME} -n ${APP_NAME} --src ${ZIP_PACKAGE_PATH}
 ```
 
 # Developement
