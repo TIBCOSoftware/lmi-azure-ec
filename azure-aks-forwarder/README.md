@@ -1,7 +1,7 @@
-# Azure function for collecting Azure AKS (Kubernetes) logs from control plane
+# LMI Event Collector for Microsoft Azure - Azure Function for Collecting Azure AKS (Kubernetes) Logs from the Control Plane
 
-This Azure function can be used to collect Azure AKS (Kubernetes) logs from control plane and send them to an LMI appliance, usually in the cloud.
-This uses Azure Event Hub for buffering of the messages and Azure function to periodically poll and forward those logs to an LMI using the ULDP protocol.
+This Azure function can be used to collect Azure Kubernetes Service (AKS) logs from the control plane and send them to a TIBCO LogLogic® Log Management Intelligence (LMI) appliance, usually in the cloud.
+This uses Azure Event Hub for buffering of the messages and Azure function to periodically poll and forward those logs to LMI using the ULDP protocol.
 
 
 # Step 1: Enable Monitor logs
