@@ -1,7 +1,7 @@
 # LMI Event Collector for Microsoft Azure - Azure Function for Collecting Azure Directory Logs and/or and Azure Activity Logs
 
 This Azure function can be used to collect Azure Directory events (sign-ins and uadits), as well as Azure Activity logs, and send them to an TIBCO LogLogic® Log Management Intelligence (LMI) appliance, usually in the cloud.
-This uses Azure Event Hub for buffering of the messages and Azure function to periodically poll and forward those logs to an LMI using the ULDP protocol.
+This uses Azure Event Hub for buffering of the messages and Azure function to periodically poll and forward those logs to LMI using the ULDP protocol.
 
 # Step 1: Creating Event Hub Namespace
 First, you need to create an Event Hub Namespace where the Azure AD logs will be forwarded to.
