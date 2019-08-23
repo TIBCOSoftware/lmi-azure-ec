@@ -1,4 +1,4 @@
-# Azure function for collecting Windows VM events
+# LMI Event Collector for Microsoft Azure - Azure Function for Collecting Microsoft Windows VM Events
 
 This Azure function can be used to collect Windows Events from Windows VMs running on Azure, and send them to an LMI appliance, usually in the cloud.
 
