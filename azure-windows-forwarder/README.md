@@ -1,8 +1,8 @@
 # LMI Event Collector for Microsoft Azure - Azure Function for Collecting Microsoft Windows VM Events
 
-This Azure function can be used to collect Windows Events from Windows VMs running on Azure, and send them to an LMI appliance, usually in the cloud.
+This Azure function can be used to collect Windows Events from Windows VMs running on Azure, and send them to a TIBCO LogLogic® Log Management Intelligence (LMI) appliance, usually in the cloud.
 
-It uses Azure Agent for event collection on the VMs, Azure Storage for storing those events, and Azure Functions to periodically poll and forward those events to an LMI using the ULDP protocol.
+It uses Azure Agent for event collection on the VMs, Azure Storage for storing those events, and Azure Functions to periodically poll and forward those events to LMI using the ULDP protocol.
 
 ## Step 1: Configure Azure Agent on the Windows VM
 
