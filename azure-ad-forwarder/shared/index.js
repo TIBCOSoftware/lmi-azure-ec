@@ -31,12 +31,12 @@ module.exports = async function (context, eventHubMessages) {
 
     eventHubMessages.forEach((message, index) => {
         message.records.forEach((record, idx) => {
-            let msg = JSON.stringify(record);
+            let msg = typeof record === 'object' ? JSON.stringify(record) : record;
             if (debug) {
                 context.log(`Processed message ${msg}`);
             }
             let eventDate = new Date(record.time);
-            if (flatten) {
+            if (flatten && typeof record === 'object') {
                 msg = util.toFlatText(msg);
             }
             resultCount++;
