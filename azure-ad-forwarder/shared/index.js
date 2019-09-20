@@ -37,7 +37,7 @@ module.exports = async function (context, eventHubMessages) {
             }
             let eventDate = new Date(record.time);
             if (flatten && typeof record === 'object') {
-                msg = util.toFlatText(msg);
+                msg = util.toFlatText(record);
             }
             resultCount++;
             uldpSender.sendMessage(uldp.createSyslogMessage(eventDate, srcIP, "MSAzureAD " + msg));
