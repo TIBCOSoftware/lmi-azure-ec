@@ -149,7 +149,7 @@ TLS_CA | Yes | The CA certificate, for LMI certificate validation. Put a base64 
 TLS_CERT | Yes | The client certificate, must be signed by the CA defined on the LMI. Put a base64 encoded payload representing the certificate (base64 client.crt) 
 TLS_KEY | Yes | The private key of the client certificate. Put a base64 encoded payload representing the private key ( base64 client.key )
 TLS_KEY_PASSPHRASE | Yes | The passphrase protecting the client key
-TLS_CHECK_NAM | No, default is true | If true, the certificate CN or alternative name(s) will be checked against the hostname/IP. 
+TLS_CHECK_NAME | No, default is true | If true, the certificate CN or alternative name(s) will be checked against the hostname/IP. 
 
 
 # Developement
