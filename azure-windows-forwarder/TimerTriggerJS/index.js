@@ -35,12 +35,44 @@ const uldpConfig = {
     collectorDomain: process.env['ULDP_COLLECTOR_DOMAIN'],
 };
 
+let tlsOptions = null;
+const tls_key_passphrase = process.env['TLS_KEY_PASSPHRASE']
+const tls_ca = process.env['TLS_CA']
+const tls_cert = process.env['TLS_CERT']
+const tls_key = process.env['TLS_KEY']
+const tls_check_name = process.env['TLS_CHECK_NAME']
+
+function readTlsOptions() {
+    let ca_data = (new Buffer(tls_ca, 'base64')).toString('ascii');
+    let cert_data = (new Buffer(tls_cert, 'base64')).toString('ascii');
+    let key_data = (new Buffer(tls_key, 'base64')).toString('ascii');
+
+    tlsOptions = {
+        "ca": ca_data,
+        "cert": cert_data,
+        "key": key_data,
+        "passphrase": tls_key_passphrase,
+        "noCheckServerIdentity": tls_check_name && tls_check_name.toLowerCase() === "false",
+    }
+    return tlsOptions
+}
+
 module.exports = async function (context, myTimer) {
     const tableSvc = azure.createTableService(storageConnectionString);
     const entGen = azure.TableUtilities.entityGenerator;
 
     let resultCount = 0;
 
+    if ( tls_ca && tls_cert && tls_key) {
+        if (tlsOptions == null) {
+            tlsOptions = readTlsOptions()
+        }
+        uldpConfig.tlsOptions = tlsOptions
+        if (uldpConfig.port === undefined) {
+            uldpConfig.port = 5515
+        }
+        context.log('Connecting to LMI ' + uldpConfig.host + " with TLS");
+    }
     let uldpSender = new uldp(uldpConfig);
     if (debug) {
         context.log('Connecting to LMI ' + uldpConfig.host);

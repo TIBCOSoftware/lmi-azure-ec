@@ -136,6 +136,22 @@ Now the last command to actualy deploy the package in the newly created function
 az functionapp deployment source config-zip -g ${GROUP_NAME} -n ${APP_NAME} --src ${ZIP_PACKAGE_PATH}
 ```
 
+
+# Using Secure ULDP (TLS encryption)
+
+In order to use Secure ULDP, your LMI instance should be configured with Secure ULDP enabled, and certificates installed. You will need the CA certificate, and a client certificate with its associated private Key.
+
+In order to configure the Azure function, you need to define the following set of configuration properties for the function app:
+
+Property | mandatory | value
+---|---|---
+TLS_CA | Yes | The CA certificate, for LMI certificate validation. Put a base64 encoded payload representing the certificate (base64 ca.crt)
+TLS_CERT | Yes | The client certificate, must be signed by the CA defined on the LMI. Put a base64 encoded payload representing the certificate (base64 client.crt) 
+TLS_KEY | Yes | The private key of the client certificate. Put a base64 encoded payload representing the private key ( base64 client.key )
+TLS_KEY_PASSPHRASE | Yes | The passphrase protecting the client key
+TLS_CHECK_NAM | No, default is true | If true, the certificate CN or alternative name(s) will be checked against the hostname/IP. 
+
+
 # Developement
 
 You need to run those commands first (this is done for you if you run the maven build):
